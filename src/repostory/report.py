@@ -10,16 +10,16 @@ from typing import Any
 from .cadence import release_cadence
 from .constants import DAYS, MONTHS
 
-_PACKAGE_TEMPLATES = "repostory.templates"
-
-
 @lru_cache(maxsize=1)
 def _load_template_parts() -> tuple[str, str, str]:
     """Read the HTML shell, CSS, and JS once and cache them."""
-    pkg = resources.files(_PACKAGE_TEMPLATES)
-    html = pkg.joinpath("dashboard.html").read_text(encoding="utf-8")
-    css = pkg.joinpath("styles.css").read_text(encoding="utf-8")
-    js = pkg.joinpath("dashboard.js").read_text(encoding="utf-8")
+    # Access via parent package: templates/ has no __init__.py, and on
+    # Python 3.9 resources.files("repostory.templates") treats it as a
+    # namespace package and returns a MultiplexedPath that breaks joinpath.
+    templates = resources.files("repostory") / "templates"
+    html = (templates / "dashboard.html").read_text(encoding="utf-8")
+    css = (templates / "styles.css").read_text(encoding="utf-8")
+    js = (templates / "dashboard.js").read_text(encoding="utf-8")
     return html, css, js
 
 
