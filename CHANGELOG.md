@@ -1,6 +1,39 @@
 # CHANGELOG
 
+## v0.1.0 (2026-05-25)
+
+### Feature
+
+* feat(cli): Improve logging output and auto-open report
+
+- Add colored, timed step-by-step CLI output with total elapsed and file size
+- Auto-open generated report in default browser (--no-open to opt out)
+- Read __version__ from installed metadata so it stays in sync with pyproject
+- Rename dashboard title from &#34;git rhythm&#34; to &#34;repostory&#34;
+- Trim README to user-facing content
+- Add repostory-env/ to .gitignore ([`2ec53ba`](https://github.com/lakshaykamat/repostory/commit/2ec53ba15df753bdf626e3336006f9d4e3a4f54f))
+
+### Fix
+
+* fix(report): Access templates via parent package for Python 3.9 compat
+
+Python 3.9&#39;s importlib.resources.files() treats a directory without
+__init__.py as a namespace package and returns a MultiplexedPath whose
+joinpath() ends up calling PosixPath(None). Access templates via
+resources.files(&#34;repostory&#34;) / &#34;templates&#34; instead — works on all
+supported Python versions. ([`0832ed7`](https://github.com/lakshaykamat/repostory/commit/0832ed7957d51d1838337beac2eb20e69f537288))
+
+### Unknown
+
+* Merge pull request #1 from lakshaykamat/feat/improve-cli-ux
+
+feat(cli): Improve logging output and auto-open report ([`941e632`](https://github.com/lakshaykamat/repostory/commit/941e632878ae8a867e0ee8422af2000b2d8b8899))
+
 ## v0.0.0 (2026-05-25)
+
+### Chore
+
+* chore(release): v0.0.0 [skip ci] ([`e427826`](https://github.com/lakshaykamat/repostory/commit/e427826262ae42fc5ab24dc6d427c67207f82372))
 
 ### Unknown
 
