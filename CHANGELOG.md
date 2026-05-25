@@ -1,6 +1,27 @@
 # CHANGELOG
 
+## v1.0.0 (2026-05-25)
+
+### Fix
+
+* fix(release): Disable 0.x versions so next release is 1.0.0
+
+Set allow_zero_version = false on python-semantic-release so the project
+starts at 1.0.0 onward. Without this, psr ignores the version in
+pyproject.toml on first release and computes from commits while in 0.x
+mode, producing 0.1.0 instead of the intended 1.0.0. ([`359eb5e`](https://github.com/lakshaykamat/repostory/commit/359eb5ed03a54dc0756faf15e77f7c308806f426))
+
+### Unknown
+
+* Merge pull request #2 from lakshaykamat/chore/semantic-release-stable-versions
+
+fix(release): Disable 0.x versions so next release is 1.0.0 ([`c0ceb95`](https://github.com/lakshaykamat/repostory/commit/c0ceb952a1563e39a3ff0a0cbd9cbc90ef9f52d7))
+
 ## v0.1.0 (2026-05-25)
+
+### Chore
+
+* chore(release): v0.1.0 [skip ci] ([`03aad61`](https://github.com/lakshaykamat/repostory/commit/03aad612dd6deccc0bca330ffc324435ac5e24ad))
 
 ### Feature
 
