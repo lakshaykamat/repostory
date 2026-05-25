@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "repostory"
+version = "1.0.0"
+description = "Self-contained HTML commit-analytics dashboard generated from `git log`."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "repostory contributors" }]
+keywords = ["git", "analytics", "dashboard", "visualization"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Version Control :: Git",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+repostory = "repostory.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["repostory*"]
+
+[tool.setuptools.package-data]
+repostory = ["templates/*.html", "templates/*.css", "templates/*.js"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+
+[tool.semantic_release]
+version_toml = ["pyproject.toml:project.version"]
+branch = "main"
+tag_format = "v{version}"
+commit_message = "chore(release): v{version} [skip ci]"
+build_command = "python -m pip install --upgrade pip build && python -m build"
+upload_to_vcs_release = true
+changelog_file = "CHANGELOG.md"
+
+[tool.semantic_release.commit_parser_options]
+allowed_tags = [
+  "feat", "fix", "refactor", "chore", "docs",
+  "test", "ci", "build", "style", "perf", "revert",
+]
+minor_tags = ["feat"]
+patch_tags = ["fix", "perf", "refactor"]

@@ -1,0 +1,55 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+build/
+dist/
+wheels/
+*.egg
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+MANIFEST
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# Test & coverage artifacts
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+
+# Type-checker caches
+.mypy_cache/
+.pyre/
+.pytype/
+.ruff_cache/
+
+# Generated dashboard output
+repostory.html
+report.html
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Local env files
+.env
+.env.*
+!.env.example

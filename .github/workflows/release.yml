@@ -1,0 +1,89 @@
+name: release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+
+      - name: Install package with dev extras
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Run pytest
+        run: pytest -q
+
+  release:
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write       # commit version bump, push tag, create release
+      issues: write
+      pull-requests: write
+    outputs:
+      released: ${{ steps.release.outputs.released }}
+      version: ${{ steps.release.outputs.version }}
+      tag: ${{ steps.release.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0      # semantic-release needs full history
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Python Semantic Release
+        id: release
+        uses: python-semantic-release/python-semantic-release@v9.8.8
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+  publish:
+    needs: release
+    if: needs.release.outputs.released == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/repostory
+    permissions:
+      id-token: write       # required for trusted publishing (OIDC)
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.release.outputs.tag }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+
+      - name: Build sdist and wheel
+        run: |
+          python -m pip install --upgrade pip build
+          python -m build
+
+      - name: Verify distribution metadata
+        run: |
+          pip install twine
+          twine check dist/*
+
+      - uses: pypa/gh-action-pypi-publish@release/v1

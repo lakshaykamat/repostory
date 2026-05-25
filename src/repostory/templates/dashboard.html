@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>git rhythm</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+{{STYLES}}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<header>
+  <div class="repo-tag"><div class="repo-dot"></div><span id="repo-pill"></span></div>
+  <h1>git rhythm</h1>
+  <div class="subtitle" id="subtitle"></div>
+</header>
+
+<div class="tabs" id="tabs"></div>
+<div class="kpi-strip" id="kpis"></div>
+
+<div class="panel">
+  <div class="panel-title">commit heat &mdash; day &times; hour</div>
+  <div class="hm-scroll"><div class="hm-grid" id="heatmap"></div></div>
+  <div class="legend-row">less <div class="legend-sw" id="hm-legend"></div> more</div>
+</div>
+
+<div class="two-col">
+  <div class="panel">
+    <div class="panel-title">by hour of day</div>
+    <svg class="chart-svg" id="hour-svg" viewBox="0 0 380 160"></svg>
+  </div>
+  <div class="panel">
+    <div class="panel-title">by weekday</div>
+    <svg class="chart-svg" id="day-svg" viewBox="0 0 380 160"></svg>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-title">weekly commits <span id="vel-badge" class="badge"></span></div>
+  <svg class="chart-svg" id="weekly-svg" viewBox="0 0 900 200"></svg>
+</div>
+
+<div class="panel">
+  <div class="panel-title">monthly volume</div>
+  <svg class="chart-svg" id="monthly-svg" viewBox="0 0 900 170"></svg>
+</div>
+
+<div class="two-col">
+  <div class="panel">
+    <div class="panel-title">commit type breakdown</div>
+    <div id="conv-panel"></div>
+  </div>
+  <div class="panel">
+    <div class="panel-title">rework rate</div>
+    <div id="rework-panel"></div>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="panel">
+    <div class="panel-title">commit size distribution <span class="badge" id="stat-badge"></span></div>
+    <div id="size-panel"></div>
+  </div>
+  <div class="panel">
+    <div class="panel-title">commit message quality</div>
+    <div id="msg-panel"></div>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-title">bus factor by directory <span class="badge">unique authors per folder</span></div>
+  <div id="bus-panel"></div>
+</div>
+
+<div class="panel">
+  <div class="panel-title">author &times; directory matrix <span class="badge">commit density</span></div>
+  <div style="overflow-x:auto">
+    <svg class="chart-svg" id="adm-svg" style="min-width:600px"></svg>
+  </div>
+</div>
+
+<!-- ── New insight panels ── -->
+
+<div class="two-col">
+  <div class="panel">
+    <div class="panel-title">file hotspots <span class="badge">by commit count</span></div>
+    <div id="hotspot-panel"></div>
+  </div>
+  <div class="panel">
+    <div class="panel-title">co-change coupling <span class="badge">files that move together</span></div>
+    <div id="coupling-panel"></div>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="panel">
+    <div class="panel-title">contribution inequality</div>
+    <div id="gini-panel"></div>
+  </div>
+  <div class="panel">
+    <div class="panel-title">author tenure</div>
+    <div style="overflow-x:auto"><svg class="chart-svg" id="tenure-svg"></svg></div>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-title">new contributor cohorts <span class="badge">authors by first commit month</span></div>
+  <svg class="chart-svg" id="cohorts-svg" viewBox="0 0 900 140"></svg>
+</div>
+
+<div class="two-col">
+  <div class="panel">
+    <div class="panel-title">work-life balance trend</div>
+    <svg class="chart-svg" id="wlb-svg" viewBox="0 0 500 180"></svg>
+  </div>
+  <div class="panel">
+    <div class="panel-title">commit message length trend</div>
+    <svg class="chart-svg" id="msg-trend-svg" viewBox="0 0 500 180"></svg>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="panel">
+    <div class="panel-title">commit weight by hour <span class="badge">avg lines changed</span></div>
+    <svg class="chart-svg" id="hourly-size-svg" viewBox="0 0 380 160"></svg>
+  </div>
+  <div class="panel" id="cadence-panel">
+    <div class="panel-title">release cadence</div>
+    <div id="cadence-content"></div>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-title">directory freshness <span class="badge">days since last commit</span></div>
+  <div id="file-age-panel"></div>
+</div>
+
+<div class="panel">
+  <div class="panel-title">calendar heatmap &mdash; last 52 weeks</div>
+  <div style="overflow-x:auto">
+    <svg class="chart-svg" id="cal-svg" viewBox="0 0 900 140" style="min-width:700px"></svg>
+  </div>
+</div>
+
+<div class="panel" id="tag-panel" style="display:none">
+  <div class="panel-title">release timeline <span id="tag-count-badge" class="badge"></span></div>
+  <svg class="chart-svg" id="tag-svg" viewBox="0 0 900 100"></svg>
+</div>
+
+<div class="panel">
+  <div class="panel-title">busiest days on record</div>
+  <div id="top-dates"></div>
+</div>
+
+</div>
+<div id="tip"></div>
+
+<script>
+{{SCRIPT}}
+</script>
+</body>
+</html>
