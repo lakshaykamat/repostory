@@ -19,6 +19,7 @@ MANIFEST
 venv/
 env/
 ENV/
+repostory-env/
 .python-version
 
 # Test & coverage artifacts
