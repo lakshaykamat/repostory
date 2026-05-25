@@ -53,6 +53,7 @@ commit_message = "chore(release): v{version} [skip ci]"
 build_command = "python -m pip install --upgrade pip build && python -m build"
 upload_to_vcs_release = true
 changelog_file = "CHANGELOG.md"
+allow_zero_version = false
 
 [tool.semantic_release.commit_parser_options]
 allowed_tags = [
